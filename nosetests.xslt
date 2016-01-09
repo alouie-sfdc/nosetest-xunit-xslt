@@ -1,4 +1,4 @@
-nosetests<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="html"/>
     <xsl:template match="/">
@@ -100,14 +100,23 @@ nosetests<?xml version="1.0" encoding="UTF-8" ?>
         </div>
 
         <div class="testcases">
+        <table>
+            <tr>
+                <td>Class</td>
+                <td>Name</td>
+                <td>Running time</td>
+                <td>Status</td>
+            </tr>
         <xsl:for-each select="testcase">
+            <tr>
             <xsl:choose>
                 <xsl:when test="not(*)">
                     <div class="passed">
-                        <pre><b>Class:</b> <xsl:value-of select="@classname"/></pre>
-                        <pre><b>Test Name:</b> <xsl:value-of select="@name"/></pre>
-                        <pre><b>Running Time:</b> <xsl:value-of select="@time"/></pre>
-                        <pre><b>State:</b><a>Passed</a></pre>
+                        <td><xsl:value-of select="@classname"/></td>
+                        <td><xsl:value-of select="@name"/></td>
+                        <td><xsl:value-of select="@time"/></td>
+                        <td>Passed</td>
+                        <!--
                         <xsl:for-each select="*">
                             <xsl:if test="@message">
                                 <div class="passed-message">
@@ -116,14 +125,16 @@ nosetests<?xml version="1.0" encoding="UTF-8" ?>
                             </xsl:if>
                         </xsl:for-each>
                     <hr></hr>
+                        -->
                    </div>
                 </xsl:when>
                 <xsl:otherwise>
                     <div class="failed">
-                        <pre><b>Class:</b> <xsl:value-of select="@classname"/></pre>
-                        <pre><b>Test Name:</b> <xsl:value-of select="@name"/></pre>
-                        <pre><b>Running Time:</b> <xsl:value-of select="@time"/></pre>
-                        <pre><b>State:</b><a>Failed</a></pre>
+                        <td><xsl:value-of select="@classname"/></td>
+                        <td><xsl:value-of select="@name"/></td>
+                        <td><xsl:value-of select="@time"/></td>
+                        <td>Failed</td>
+                        <!--
                         <xsl:for-each select="system-out">
                             <div class="error-message">
                                 <pre><a class="display-message"> Error Message</a></pre>
@@ -131,10 +142,13 @@ nosetests<?xml version="1.0" encoding="UTF-8" ?>
                             </div>
                         </xsl:for-each>
                     <hr></hr>
+                    -->
                     </div>
                 </xsl:otherwise>
             </xsl:choose>
+        </tr>
         </xsl:for-each>
+        </table>
         </div>
 
     </xsl:template>
